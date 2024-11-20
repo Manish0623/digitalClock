@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-black">
+
+    <div class=" h-screen flex items-center justify-center">
+        <div class="h-72 w-72 bg-yellow-400  rounded-xl">
+            <div id="days" class="text-red-700 flex items-center justify-center text-center text-4xl">loading days....
+            </div>
+            <div id="time"
+                class="text-red-700   flex items-center justify-center text-center text-6xl rounded-xl  relative .inline-block top-16">
+                00:00:00
+            </div>
+            <div id="date"
+                class="text-red-700 flex items-center justify-center text-center relative .inline-block top-36 text-3xl">
+                loading dates...</div>
+        </div>
+    </div>
+    <script>
+        function clock() {
+            const now = new Date();
+
+            let hours = now.getHours();
+            const minutes = String(now.getMinutes()).padStart(2, "0");
+            const seconds = String(now.getSeconds()).padStart(2, "0");
+
+            const ampm = hours >= 12 ? "PM" : "AM";
+
+            hours = hours % 12 || 12;
+            hours = String(hours).padStart(2, "0");
+
+            const year = now.getFullYear();
+            const month = now.toLocaleString("default", { month: "long" });
+            const date = String(now.getDate()).padStart(2, "0");
+            const day = now.toLocaleString("default", { weekday: "long" });
+
+            document.getElementById("time").textContent = `${hours}:${minutes}:${seconds}`;
+            document.getElementById("date").textContent = `${date} ${month} ${year}`;
+            document.getElementById("days").textContent = `${day}`
+        }
+        setInterval(clock, 1000);
+        clock();
+
+    </script>
+</body>
+
+</html>
